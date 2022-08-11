@@ -1,5 +1,6 @@
 # import the function that will return an instance of a connection
-from mysqlconnection import connectToMySQL
+from mysqlconnection import MySQLConnection, connectToMySQL
+
 # model the class after the friend table from our database
 
 
@@ -21,9 +22,15 @@ class User:
         # Create an empty list to append our instances of friends
         users = []
         # Iterate over the db results and create instances of friends with cls.
-        for user in results:
-            users.append(cls(user))
+        for dictionary in results:
+            users.append(cls(dictionary))
         return users
+
+    @classmethod
+    def get_one(cls, data):
+        query = "SELECT * FROM users where id = %(id)s;"
+        results = connectToMySQL('users').query_db(query, data)
+        return cls(results[0])
 
     @classmethod
     def add_one(cls, data):
@@ -31,3 +38,14 @@ class User:
         results = connectToMySQL('users').query_db(query, data)
         print(results)
         return results
+
+    @classmethod
+    def update(cls, data):
+        query = "UPDATE users SET first_name= %(first_name)s, last_name = %(last_name)s, email = %(email)s WHERE id = %(id)s;"
+        return connectToMySQL('users').query_db(query, data)
+
+    @classmethod
+    def delete(cls, data):
+        query = "DELETE FROM users WHERE id = %(id)s"
+
+        return connectToMySQL('users').query_db(query, data)
