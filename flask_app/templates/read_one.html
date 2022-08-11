@@ -11,14 +11,16 @@
     />
   </head>
   <body>
-    <table class="table table-dark table-hover">
-      <h1>User{{get_user.id}}</h1>
-      <p>Full Name {{get_user.first_name}} {{get_user.last_name}}</p>
-      <p>Email {{get_user.email}}</p>
-      <p>Created on:{{get_user.created_at}}</p>
-      <p>Last Updated on:{{get_user.updated_at}}</p>
-    </table>
-    <a href="/user"><button>Return</button></a>
+    <div class="container">
+      <table class="table table-dark table-hover">
+        <h1>User{{get_user.id}}</h1>
+        <p>Full Name {{get_user.first_name}} {{get_user.last_name}}</p>
+        <p>Email {{get_user.email}}</p>
+        <p>Created on:{{get_user.created_at}}</p>
+        <p>Last Updated on:{{get_user.updated_at}}</p>
+      </table>
+      <a href="/user"><button>Return</button></a>
+    </div>
   </body>
 </html>
 <link
